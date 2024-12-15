@@ -22,7 +22,7 @@
         @apply text-[18px] leading-[30px] font-[400] text-mainColor mt-[18px]
     }
     .header{
-        @apply w-full bg-mainColor h-[70px]
+        @apply w-full bg-mainColor
     }
 }
 
