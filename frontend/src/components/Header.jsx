@@ -47,7 +47,7 @@ const Header = () => {
                 <div>
                     <img className="w-[150px] md:w-[200px] object-cover cursor-pointer" src={logoWithName} alt="Logo" />
                 </div>
-                <div className="flex flex-row text-accentColorLightBlue items-center justify-around md:gap-4 gap-2">
+                <div className="flex flex-row text-accentColorLightBlue items-start justify-around md:gap-4 gap-2">
                     <p className="text-secondaryColor flex-none text-[16px] max-h-[25px]">
                         {username ? `Hi ${username}` : "Hi Guest"}
                     </p>
