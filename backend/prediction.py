@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from joblib import load
-import matplotlib.pyplot as plt
 
 def get_candles(interval, prev_val = 0):
     tv = TvDatafeed()
