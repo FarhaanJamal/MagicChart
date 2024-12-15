@@ -45,16 +45,16 @@ const Header = () => {
         <div className="container">
             <div className="flex items-center justify-between">
                 <div>
-                    <img onClick={() => navigate('/')} className="w-[150px] md:w-[200px] object-cover cursor-pointer" src={logoWithName} alt="Logo" />
+                    <img className="w-[150px] md:w-[200px] object-cover cursor-pointer" src={logoWithName} alt="Logo" />
                 </div>
                 <div className="flex flex-col md:flex-row text-accentColorLightBlue items-center justify-around md:gap-4 gap-1">
-                    <p className="text-secondaryColor flex-none text-[16px]">
+                    <p className="text-secondaryColor flex-none text-[16px] max-h-[25px]">
                         {username ? `Hi ${username}` : "Hi Guest"}
                     </p>
                     <div onClick={() => {
                         localStorage.removeItem('userData')
                         navigate('/login')
-                        }} className="text-accentColorLightBlue flex-none text-[14px] md:text-[16px] cursor-pointer">
+                        }} className="text-accentColorLightBlue flex-none text-[14px] max-h-[25px] md:text-[16px] cursor-pointer">
                             Logout
                     </div>
                 </div>
