@@ -10,4 +10,5 @@ bcrypt==4.2.0
 keras==3.3.3
 dnspython==1.16.0
 joblib==1.4.2
+tensorflow==2.16.1
 git+https://github.com/rongardF/tvdatafeed.git
