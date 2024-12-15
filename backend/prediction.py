@@ -3,34 +3,54 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from joblib import load
+import matplotlib.pyplot as plt
+from time import sleep
 
 def get_candles(interval, prev_val = 0):
     tv = TvDatafeed()
+    retries = 0
+    max_retries = 5
 
-    if interval == "1_minute":
-        niftyIndex = tv.get_hist(symbol='NIFTY', exchange='NSE', interval=Interval.in_1_minute, n_bars=(211 + prev_val))
-    elif interval == "3_minute":
-        niftyIndex = tv.get_hist(symbol='NIFTY', exchange='NSE', interval=Interval.in_3_minute, n_bars=(211 + prev_val))
-    elif interval == "5_minute":
-        niftyIndex = tv.get_hist(symbol='NIFTY', exchange='NSE', interval=Interval.in_5_minute, n_bars=(211 + prev_val))
-    elif interval == "15_minute":
-        niftyIndex = tv.get_hist(symbol='NIFTY', exchange='NSE', interval=Interval.in_15_minute, n_bars=(211 + prev_val))
-    elif interval == "1_hour":
-        niftyIndex = tv.get_hist(symbol='NIFTY', exchange='NSE', interval=Interval.in_1_hour, n_bars=(211 + prev_val))
-    else:
-        raise Exception("Invalid Interval")
+    while retries < max_retries:
+        try:
+            if interval == "1_minute":
+                niftyIndex = tv.get_hist(symbol='NIFTY', exchange='NSE', interval=Interval.in_1_minute, n_bars=(211 + prev_val))
+            elif interval == "3_minute":
+                niftyIndex = tv.get_hist(symbol='NIFTY', exchange='NSE', interval=Interval.in_3_minute, n_bars=(211 + prev_val))
+            elif interval == "5_minute":
+                niftyIndex = tv.get_hist(symbol='NIFTY', exchange='NSE', interval=Interval.in_5_minute, n_bars=(211 + prev_val))
+            elif interval == "15_minute":
+                niftyIndex = tv.get_hist(symbol='NIFTY', exchange='NSE', interval=Interval.in_15_minute, n_bars=(211 + prev_val))
+            elif interval == "1_hour":
+                niftyIndex = tv.get_hist(symbol='NIFTY', exchange='NSE', interval=Interval.in_1_hour, n_bars=(211 + prev_val))
+            else:
+                raise ValueError("Invalid Interval")
 
-    data = pd.DataFrame(niftyIndex)
-    data.reset_index(inplace=True)
-    data.drop(columns=["symbol", "volume"], inplace=True)
+            data = pd.DataFrame(niftyIndex)
+            data.reset_index(inplace=True)
+            data.drop(columns=["symbol", "volume"], inplace=True)
 
-    currentDate = pd.Timestamp.now()
-    if data.iloc[-1]['datetime'] < currentDate:
-        data = data.iloc[:-1]
-        
-    if prev_val != 0:
-        data = data.iloc[:-prev_val].reset_index(drop=True)
+            currentDate = pd.Timestamp.now()
+            if data.iloc[-1]['datetime'] < currentDate:
+                data = data.iloc[:-1]
+                
+            if prev_val != 0:
+                data = data.iloc[:-prev_val].reset_index(drop=True)
 
+            return data
+
+        except KeyError:
+            retries += 1
+            print(f"KeyError encountered. Retrying... ({retries}/{max_retries})")
+            sleep(2)
+
+    raise KeyError("Maximum retries reached. Unable to fetch data.")
+
+
+
+def prepare_candles(interval, prev_val = 0):
+    data = get_candles(interval, prev_val)
+    
     #--------------------------------------------------------------
 
     data["datetime"] = pd.to_datetime(data["datetime"])
@@ -132,7 +152,7 @@ def predict_n_prepare(candle_sequences, data, interval):
     return plot_data
 
 def get_prediction(interval):
-    candle_sequences, data = get_candles(interval)
+    candle_sequences, data = prepare_candles(interval)
     #print("Input shape",candle_sequences.shape)
     plot_data = predict_n_prepare(candle_sequences, data, interval)
     #print(plot_data)
