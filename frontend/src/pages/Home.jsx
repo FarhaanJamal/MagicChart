@@ -41,21 +41,21 @@ const Home = () => {
                 if (currentSecond === 0) {
                     sleepTime = 60000
                 } else {
-                    sleepTime = (60 - currentSecond) * 1000 + (5 * 1000 ) 
+                    sleepTime = (60 - currentSecond) * 1000 + (2 * 1000 ) 
                 }
             } else if (interval === 3) {
                 const remainder = currentMinute % 3
-                sleepTime = (3 - remainder) * 60 * 1000 + (5 * 1000 ) - currentSecond * 1000
+                sleepTime = (3 - remainder) * 60 * 1000 + (2 * 1000 ) - currentSecond * 1000
             }  
             else if (interval === 5) {
                 const remainder = currentMinute % 5
-                sleepTime = (5 - remainder) * 60 * 1000 + (5 * 1000 ) - currentSecond * 1000
+                sleepTime = (5 - remainder) * 60 * 1000 + (2 * 1000 ) - currentSecond * 1000
             } else if (interval === 15) {
                 const remainder = currentMinute % 15
-                sleepTime = (15 - remainder) * 60 * 1000 + (5 * 1000 ) - currentSecond * 1000
+                sleepTime = (15 - remainder) * 60 * 1000 + (2 * 1000 ) - currentSecond * 1000
             }
             else if (interval === 60) {
-                sleepTime = (60 - currentMinute + 15) * 60 * 1000 + (5 * 1000 ) - currentSecond * 1000 
+                sleepTime = (60 - currentMinute + 15) * 60 * 1000 + (2 * 1000 ) - currentSecond * 1000 
             }
             return sleepTime
         }
