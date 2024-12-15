@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from joblib import load
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from time import sleep
 
 def get_candles(interval, prev_val = 0):
