@@ -42,7 +42,7 @@ const Login = () => {
                 }
                 localStorage.setItem("userData", JSON.stringify(userData));
                 toast.success(result.message)
-                navigate("/")
+                navigate("/home")
             } else {
                 const err = await response.json()
                 toast.error(err.detail)
@@ -57,8 +57,8 @@ const Login = () => {
         <div className="min-h-screen min-w-[354px] flex flex-col">
             <div className="flex-grow flex justify-center">
                 <div className="w-[768px]">
-                    <div className="h-[300px] flex justify-center items-center">
-                        <img  className="object-cover mt-[45px] h-[125px]" src={logoWithName} alt="" />
+                    <div className="h-[200px] sm:h-[250px] flex justify-center items-center">
+                        <img  className="object-cover w-[300px] sm:w-[450px]" src={logoWithName} alt="" />
                     </div>
                     <div className="container">
                         <div className="rounded-[18px] mx-[20px] bg-mainColor shadow-xl text-accentColorLightBlue">
