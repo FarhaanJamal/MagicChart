@@ -32,6 +32,7 @@ const Home = () => {
     }
 
     useEffect(() => {
+        sleepTime = 2000
         const calculateSleepTime = (interval) => {
             const curTime = new Date()
             const currentMinute = curTime.getMinutes()
