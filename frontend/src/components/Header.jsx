@@ -48,13 +48,13 @@ const Header = () => {
                     <img className="w-[150px] md:w-[200px] object-cover cursor-pointer" src={logoWithName} alt="Logo" />
                 </div>
                 <div className="flex flex-row text-accentColorLightBlue items-start justify-around md:gap-4 gap-2">
-                    <p className="text-secondaryColor flex-none text-[16px] max-h-[25px]">
+                    <p className="text-secondaryColor flex-none text-[16px] max-h-[70px]">
                         {username ? `Hi ${username}` : "Hi Guest"}
                     </p>
                     <div onClick={() => {
                         localStorage.removeItem('userData')
                         navigate('/login')
-                        }} className="text-accentColorLightBlue flex-none text-[14px] max-h-[25px] md:text-[16px] cursor-pointer">
+                        }} className="text-accentColorLightBlue flex-none text-[14px] max-h-[70px] md:text-[16px] cursor-pointer">
                             Logout
                     </div>
                 </div>
