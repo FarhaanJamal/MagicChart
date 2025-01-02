@@ -15,8 +15,8 @@ const Login = () => {
     const navigate = useNavigate()
     
     useEffect(() => {
-        toast.info("Server may take up to 50 seconds if idle.");
-        toast.info("Thank you for your patience!");
+        toast.info("Server may take up to 50 seconds if idle.", { autoClose: 10000 });
+        toast.info("Thank you for your patience!", { autoClose: 10000 });
     }, []);
 
     const handleInputChange = e => {
