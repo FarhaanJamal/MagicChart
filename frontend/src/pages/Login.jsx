@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {NavLink, Link, useNavigate} from 'react-router-dom'
 import { BASE_URL } from "../config";
 import logoWithName from '../assets/images/logo-with-name.png'
@@ -13,6 +13,11 @@ const Login = () => {
     })
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    
+    useEffect(() => {
+        toast.info("Server may take up to 50 seconds if idle.");
+        toast.info("Thank you for your patience!");
+    }, []);
 
     const handleInputChange = e => {
         setFormData({ ... formData, [e.target.name]: e.target.value})
