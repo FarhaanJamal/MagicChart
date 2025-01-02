@@ -122,7 +122,7 @@ def prepare_candles(interval, prev_val = 0):
 
 
 def predict_n_prepare(candle_sequences, data, interval):
-    #data["datetime"] = pd.to_datetime(data["datetime"]) + pd.Timedelta(hours=5.5)
+    data["datetime"] = pd.to_datetime(data["datetime"]) + pd.Timedelta(hours=5.5)
     data = data.iloc[1:].reset_index(drop=True)
     model = load(f"archive/models/model_{interval}.save")
     scaled_pred = model.predict(candle_sequences)
